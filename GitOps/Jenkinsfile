@@ -1,0 +1,46 @@
+@Library('Shared') _
+pipeline{
+ agent any
+ parameters{
+	string(name: "FRONTEND_DOCKER_TAG", defaultValue: "", description : "frontend docker tag build by docker tag")
+	string(name: "BACKEND_DOCKER_TAG", defaultValue: "", description: "backend docker tag build by dooker tag")
+ }
+ stages{
+ 	stage("workspace clean up"){
+		steps{
+			script{
+				cleanWs()
+			}
+		}	
+	}
+        stage("git: code checkout"){
+                steps{
+                        script{
+				code_checkout("https://github.com/Vinayak-100ni/jenkins-CI-CD.git","main")
+                        }
+                }
+        }
+        stage("verify: docker image"){
+                steps{
+                        script{
+				echo "FRONTEND_DOCKER_TAG: ${params.FRONTEND_DOCKER_TAG}"
+				echo "BAECKEND_DOCKER_TAG: ${params.BACKEND_DOCKER_TAG}"
+                        }
+                }
+        }
+        stage("update: k8s manifests"){
+                steps{
+                        script{
+				dir(')
+                        }
+                }
+        }
+        stage(){
+                steps{
+                        script{
+
+                        }
+                }
+        }
+ }
+}
